@@ -20,7 +20,7 @@ In addition, this project will include:
 
 ### Wireframes
 
-This app will consist of a single screen with a graphical interface for the sequencer cells, a play/pause button at the bottom and a tempo bar. The right side of the interface will show a stylized piano roll so users know what rows correspond to what pitches. A button on the bottom right will toggle the instructions modal.
+This app will consist of a single screen with a graphical interface for the sequencer cells, a play/pause button at the bottom and a tempo slide bar. The grid by default will not display inactive cells, but when the user clicks on a cell, it will highlight a color to show it is active. The left side of the interface will show a stylized piano roll so users know what rows correspond to what pitches. A button on the bottom right will toggle the instructions modal.
 
 ![wireframes](/docs/main_wireframe.png)
 
@@ -65,4 +65,4 @@ There are many directions this cellular automata engine could eventually go.  So
 
 - [ ] Add option to extend the loop length (larger grid).
 - [ ] Different instrument sound options.
-- [ ] Allow possibility of building multiple small sequences and combining them for a longer sequence. 
+- [ ] Allow possibility of building multiple small sequences and combining them for a longer sequence.
