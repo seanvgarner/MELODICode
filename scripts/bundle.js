@@ -73,10 +73,10 @@
 	  }).toMaster();
 	  var drums = new _Tone2.default.MultiPlayer({
 	    urls: {
-	      "KICK": "./sounds/snare.wav",
-	      "SNARE": "./sounds/snare.wav",
-	      "CLAP": "./sounds/clap.wav",
-	      "HAT": "./sounds/hat.wav"
+	      "KICK": "./scripts/sounds/snare.wav",
+	      "SNARE": "./scripts/sounds/snare.wav",
+	      "CLAP": "./scripts/sounds/clap.wav",
+	      "HAT": "./scripts/sounds/hat.wav"
 	    },
 	    volume: -10,
 	    fadeOut: 0.1
