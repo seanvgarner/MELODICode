@@ -3,9 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>MelodiCode</title>
-    <link rel="stylesheet" href="styles/canvas.scss">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+      integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/bundle.js"></script>
+    <link rel="stylesheet" href="styles/reset.css">
+    <link rel="stylesheet" href="styles/grid.css">
+    <link rel="stylesheet" href="styles/btns.css">
   </head>
   <body>
-    <canvas id="canvas" width="800" height="600"></canvas>
+    <div id="time-bar" class="time-bar group"></div>
+    <div id="grid-container" class="grid-container group"></div>
+    <div class="play-btn">Play</div>
+    <div class="pause-btn">Pause</div>
   </body>
 </html>

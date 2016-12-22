@@ -1,0 +1,63 @@
+.time-bar {
+  display: block;
+  width: 864px;
+  margin: 0 auto;
+  border: 1px solid grey;
+  background-color: grey;
+}
+
+.time-bar-cell {
+  display: block;
+  float: left;
+  width: 50px;
+  height: 10px;
+  box-sizing: border-box;
+  margin: 2px;
+  background-color: #424242;
+  border-radius: 15%;
+}
+
+.light {
+  background-color: #5bff76;
+}
+
+.grid-container {
+  display: block;
+  margin: 0 auto;
+  width: 864px;
+  border: 1px solid grey;
+}
+
+.filled-grid {
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+}
+
+
+.cell {
+  display: block;
+  float: left;
+  width: 50px;
+  height: 30px;
+  box-sizing: border-box;
+  margin: 2px;
+  background-color: #c9c9c9;
+  border-radius: 8%;
+}
+
+.cell:hover {
+  background-color: #fcffb2;
+  cursor: pointer;
+}
+
+.active {
+  background-color: #49e9ff;
+}
+.active:hover {
+  background-color: #49e9ff;
+}
+
+.hit {
+  background-color: #b5f6ff;
+}
