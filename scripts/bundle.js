@@ -108,11 +108,18 @@
 	    });
 	  });
 	
+	  var mappedDrums = drumGrid.rows[0].map(function (col, i) {
+	    return drumGrid.rows.map(function (row) {
+	      return row[i];
+	    });
+	  });
+	
 	  var loop = new _Tone2.default.Sequence(function (time, col) {
 	
 	    for (var _i = 0; _i < 16; _i++) {
 	      var column = mappedColumns[col];
 	      var currentTimeCell = timeCellArr[col];
+	
 	      var previousColumn = mappedColumns[col - 1];
 	      var previousTimeCell = timeCellArr[col - 1];
 	
@@ -127,6 +134,19 @@
 	        column[_i].playNote();
 	      }
 	      previousColumn[_i].parentContainer.removeClass("hit");
+	    }
+	
+	    for (var _i2 = 0; _i2 < 4; _i2++) {
+	      var currentDrum = mappedDrums[col];
+	      var previousDrum = mappedDrums[col - 1];
+	
+	      if (col === 0) {
+	        previousDrum = mappedDrums[15];
+	      }
+	
+	      if (currentDrum[_i2].active) {
+	        currentDrum[_i2].playDrum();
+	      }
 	    }
 	  }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "8n");
 	
@@ -22343,8 +22363,6 @@
 	      } else {
 	        this.active = true;
 	        this.parentContainer.addClass("drum-active");
-	        var vel = Math.random() * 0.5 + 0.5;
-	        this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
 	      }
 	    }
 	  }]);

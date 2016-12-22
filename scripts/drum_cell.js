@@ -20,8 +20,6 @@ class DrumCell {
     } else {
       this.active = true;
       this.parentContainer.addClass("drum-active");
-      const vel = Math.random() * 0.5 + 0.5;
-      this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
     }
   }
 }

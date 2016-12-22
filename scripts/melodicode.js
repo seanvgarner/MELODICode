@@ -51,12 +51,19 @@ $(() => {
     });
   });
 
+  const mappedDrums = drumGrid.rows[0].map(function(col, i) {
+    return drumGrid.rows.map(function(row) {
+      return row[i];
+    });
+  });
+
 
   const loop = new Tone.Sequence((time, col) => {
 
     for (let i = 0; i < 16; i++) {
       const column = mappedColumns[col];
       const currentTimeCell = timeCellArr[col];
+
       let previousColumn = mappedColumns[col - 1];
       let previousTimeCell = timeCellArr[col - 1];
 
@@ -71,6 +78,19 @@ $(() => {
         column[i].playNote();
       }
       previousColumn[i].parentContainer.removeClass("hit");
+    }
+
+    for (let i = 0; i < 4; i++) {
+      const currentDrum = mappedDrums[col];
+      let previousDrum = mappedDrums[col - 1];
+
+      if(col === 0) {
+        previousDrum = mappedDrums[15];
+      }
+
+      if (currentDrum[i].active) {
+        currentDrum[i].playDrum();
+      }
     }
 
   },[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "8n");
