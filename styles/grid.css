@@ -61,3 +61,39 @@
 .hit {
   background-color: #b5f6ff;
 }
+
+.drum-container {
+  display: block;
+  margin: 0 auto;
+  width: 864px;
+  border: 1px solid grey;
+}
+
+.filled-drum-grid {
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+}
+
+.drum-cell {
+  display: block;
+  float: left;
+  width: 50px;
+  height: 30px;
+  box-sizing: border-box;
+  margin: 2px;
+  background-color: #c9c9c9;
+  border-radius: 8%;
+}
+
+.drum-cell:hover {
+  background-color: #fcffb2;
+  cursor: pointer;
+}
+
+.drum-active {
+  background-color: #49e9ff;
+}
+.drum-active:hover {
+  background-color: #49e9ff;
+}

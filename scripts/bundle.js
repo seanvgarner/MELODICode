@@ -54,6 +54,10 @@
 	
 	var _grid2 = _interopRequireDefault(_grid);
 	
+	var _drum_grid = __webpack_require__(5);
+	
+	var _drum_grid2 = _interopRequireDefault(_drum_grid);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	$(function () {
@@ -67,7 +71,18 @@
 	      "release": 0.8
 	    }
 	  }).toMaster();
+	  var drums = new _Tone2.default.MultiPlayer({
+	    urls: {
+	      "KICK": "./sounds/snare.wav",
+	      "SNARE": "./sounds/snare.wav",
+	      "CLAP": "./sounds/clap.wav",
+	      "HAT": "./sounds/hat.wav"
+	    },
+	    volume: -10,
+	    fadeOut: 0.1
+	  }).toMaster();
 	  var $gridContainer = $("#grid-container");
+	  var $drumContainer = $("#drum-container");
 	  var $timeBar = $("#time-bar");
 	  var timeCellArr = [];
 	  for (var i = 0; i < 16; i++) {
@@ -77,7 +92,9 @@
 	    timeCellArr.push($timeBarCell);
 	    $timeBar.append($timeBarCell);
 	  }
+	
 	  var grid = new _grid2.default($gridContainer, synth);
+	  var drumGrid = new _drum_grid2.default($drumContainer, drums);
 	
 	  $(document).mousedown(function () {
 	    grid.isMouseDown = true;
@@ -114,19 +131,31 @@
 	  }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "8n");
 	
 	  _Tone2.default.Transport.start();
-	  _Tone2.default.Transport.bpm.value = 100;
+	  _Tone2.default.Transport.bpm.value = 140;
 	  var $playBtn = $(".play-btn");
 	  var $pauseBtn = $(".pause-btn");
 	
 	  $playBtn.on("click", function () {
+	
 	    loop.start();
 	  });
 	
 	  $pauseBtn.on("click", function () {
 	    loop.stop();
+	
 	    timeCellArr.forEach(function (timeCell) {
 	      timeCell.removeClass("light");
 	    });
+	    grid.rows.forEach(function (row) {
+	      row.forEach(function (noteCell) {
+	        noteCell.parentContainer.removeClass("hit");
+	      });
+	    });
+	  });
+	
+	  $("#tempo-slider").change(function (e) {
+	    var newTempo = parseInt(e.currentTarget.value);
+	    _Tone2.default.Transport.bpm.value = newTempo;
 	  });
 	});
 
@@ -22196,6 +22225,134 @@
 	}();
 	
 	exports.default = Cell;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _drum_cell = __webpack_require__(6);
+	
+	var _drum_cell2 = _interopRequireDefault(_drum_cell);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var DrumGrid = function () {
+	  function DrumGrid(parentContainer, drums) {
+	    _classCallCheck(this, DrumGrid);
+	
+	    this.isMouseDown = false;
+	    this.parentContainer = parentContainer;
+	    this.drums = drums;
+	    this.rows = new Array(4);
+	    this.drumGridElement = $(document.createElement("div"));
+	    this.drumTypes = ["KICK", "SNARE", "CLAP", "HAT"];
+	    this.createGrid();
+	  }
+	
+	  _createClass(DrumGrid, [{
+	    key: "createGrid",
+	    value: function createGrid() {
+	      for (var i = 0; i < 4; i++) {
+	        this.rows[i] = [];
+	        for (var j = 0; j < 16; j++) {
+	          var drumCellContainer = document.createElement("div");
+	          var $drumCellContainer = $(drumCellContainer);
+	          var drumCell = new _drum_cell2.default($drumCellContainer, this.drumTypes[i], this.drums);
+	          $drumCellContainer.addClass("drum-cell");
+	          drumCellContainer.drumCell = drumCell;
+	          this.rows[i].push(drumCell);
+	          this.addActivationHandlers($drumCellContainer);
+	          this.drumGridElement.append($drumCellContainer);
+	        }
+	      }
+	
+	      this.drumGridElement.addClass("filled-drum-grid group");
+	      this.parentContainer.append(this.drumGridElement);
+	    }
+	  }, {
+	    key: "addActivationHandlers",
+	    value: function addActivationHandlers($drumCellContainer) {
+	      var _this = this;
+	
+	      $drumCellContainer.on("click", function (e) {
+	        e.currentTarget.drumCell.toggleActive();
+	      });
+	
+	      $drumCellContainer.mouseenter(function (e) {
+	
+	        if (_this.isMouseDown) {
+	          e.currentTarget.drumCell.toggleActive();
+	        }
+	      });
+	    }
+	  }]);
+	
+	  return DrumGrid;
+	}();
+	
+	exports.default = DrumGrid;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var DrumCell = function () {
+	  function DrumCell(parentContainer, drumType, drums) {
+	    _classCallCheck(this, DrumCell);
+	
+	    this.parentContainer = parentContainer;
+	    this.drumType = drumType;
+	    this.drums = drums;
+	    this.active = false;
+	  }
+	
+	  _createClass(DrumCell, [{
+	    key: "playDrum",
+	    value: function playDrum() {
+	      if (this.active) {
+	        var vel = Math.random() * 0.5 + 0.5;
+	        this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
+	      }
+	    }
+	  }, {
+	    key: "toggleActive",
+	    value: function toggleActive() {
+	      if (this.active) {
+	        this.active = false;
+	        this.parentContainer.removeClass("drum-active");
+	      } else {
+	        this.active = true;
+	        this.parentContainer.addClass("drum-active");
+	        var vel = Math.random() * 0.5 + 0.5;
+	        this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
+	      }
+	    }
+	  }]);
+	
+	  return DrumCell;
+	}();
+	
+	exports.default = DrumCell;
 
 /***/ }
 /******/ ]);

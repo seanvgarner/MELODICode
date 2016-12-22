@@ -1,5 +1,6 @@
 import Tone from 'Tone';
 import Grid from './grid';
+import DrumGrid from './drum_grid';
 
 $(() => {
 
@@ -12,7 +13,18 @@ $(() => {
         "release": 0.8,
         }
   }).toMaster();
+  const drums = new Tone.MultiPlayer({
+        urls : {
+          "KICK" : "./sounds/snare.wav",
+          "SNARE" : "./sounds/snare.wav",
+          "CLAP" : "./sounds/clap.wav",
+          "HAT" : "./sounds/hat.wav",
+        },
+        volume : -10,
+        fadeOut : 0.1,
+      }).toMaster();
   const $gridContainer = $("#grid-container");
+  const $drumContainer = $("#drum-container");
   const $timeBar = $("#time-bar");
   const timeCellArr = [];
   for (let i = 0; i < 16; i++) {
@@ -22,7 +34,10 @@ $(() => {
     timeCellArr.push($timeBarCell);
     $timeBar.append($timeBarCell);
   }
+
+
   const grid = new Grid($gridContainer, synth);
+  const drumGrid = new DrumGrid($drumContainer, drums);
 
   $(document).mousedown(() => {
     grid.isMouseDown = true;
@@ -60,20 +75,33 @@ $(() => {
 
   },[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "8n");
 
+
   Tone.Transport.start();
-  Tone.Transport.bpm.value = 100;
+  Tone.Transport.bpm.value = 140;
   const $playBtn = $(".play-btn");
   const $pauseBtn = $(".pause-btn");
 
   $playBtn.on("click", () => {
+
       loop.start();
   });
 
   $pauseBtn.on("click", () => {
     loop.stop();
+
     timeCellArr.forEach((timeCell) => {
       timeCell.removeClass("light");
     });
+    grid.rows.forEach((row) => {
+      row.forEach((noteCell) => {
+        noteCell.parentContainer.removeClass("hit");
+      });
+    });
+  });
+
+  $("#tempo-slider").change((e) => {
+    const newTempo = parseInt(e.currentTarget.value);
+    Tone.Transport.bpm.value = newTempo;
   });
 
 });

@@ -1,3 +1,9 @@
+.buttons {
+  display: block;
+  width: 854px;
+  margin: 0 auto;
+}
+
 .play-btn {
   display: block;
   height: 30px;
@@ -18,3 +24,8 @@
   box-sizing: border-box;
   float: left;
 }
+
+/*.slider {
+  display: block;
+  float: left;
+}*/

@@ -6,6 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
       integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
       crossorigin="anonymous"></script>
+      <script type='text/javascript'  src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js' ></script>
     <script type="text/javascript" src="scripts/bundle.js"></script>
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/grid.css">
@@ -14,7 +15,11 @@
   <body>
     <div id="time-bar" class="time-bar group"></div>
     <div id="grid-container" class="grid-container group"></div>
-    <div class="play-btn">Play</div>
-    <div class="pause-btn">Pause</div>
+    <div id="drum-container" class="drum-container group"></div>
+    <div class="buttons group">
+      <div class="play-btn">Play</div>
+      <div class="pause-btn">Pause</div>
+      <input id="tempo-slider" type="range" min="80" max="200" step="5" value="140"/>
+    </div>
   </body>
 </html>
