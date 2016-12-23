@@ -83,6 +83,7 @@ $(() => {
       }
 
       if (currentDrum[i].active) {
+        currentDrum[i].parentContainer.addClass("drum-hit");
         switch (currentDrum[i].drumType) {
           case "KICK":
             kick.play();
@@ -96,8 +97,8 @@ $(() => {
           case "HAT":
             hat.play();
         }
-
       }
+      previousDrum[i].parentContainer.removeClass("drum-hit");
     }
 
   },[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "8n");

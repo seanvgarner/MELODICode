@@ -140,6 +140,7 @@
 	      }
 	
 	      if (currentDrum[_i2].active) {
+	        currentDrum[_i2].parentContainer.addClass("drum-hit");
 	        switch (currentDrum[_i2].drumType) {
 	          case "KICK":
 	            kick.play();
@@ -154,6 +155,7 @@
 	            hat.play();
 	        }
 	      }
+	      previousDrum[_i2].parentContainer.removeClass("drum-hit");
 	    }
 	  }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "8n");
 	

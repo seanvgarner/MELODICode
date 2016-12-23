@@ -1,3 +1,7 @@
+body {
+  background-color: #444444;
+}
+
 .time-bar {
   display: block;
   width: 864px;
@@ -18,7 +22,7 @@
 }
 
 .light {
-  background-color: #5bff76;
+  background-color: #99ff26;
 }
 
 .grid-container {
@@ -92,8 +96,12 @@
 }
 
 .drum-active {
-  background-color: #dcad2e;
+  background-color: #75ff56;
 }
 .drum-active:hover {
-  background-color: #dcad2e;
+  background-color: #75ff56;
+}
+
+.drum-hit {
+  background-color: #c2ffb5;
 }
