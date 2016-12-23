@@ -39,11 +39,11 @@
   display: block;
   float: left;
   width: 50px;
-  height: 30px;
+  height: 20px;
   box-sizing: border-box;
   margin: 2px;
   background-color: #c9c9c9;
-  border-radius: 8%;
+  border-radius:15%;
 }
 
 .cell:hover {
@@ -79,10 +79,10 @@
   display: block;
   float: left;
   width: 50px;
-  height: 30px;
+  height: 20px;
   box-sizing: border-box;
   margin: 2px;
-  background-color: #c9c9c9;
+  background-color: #424242;
   border-radius: 8%;
 }
 
@@ -92,8 +92,8 @@
 }
 
 .drum-active {
-  background-color: #49e9ff;
+  background-color: #dcad2e;
 }
 .drum-active:hover {
-  background-color: #49e9ff;
+  background-color: #dcad2e;
 }

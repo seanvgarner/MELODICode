@@ -1,10 +1,9 @@
 import DrumCell from './drum_cell';
 
 class DrumGrid {
-  constructor(parentContainer, drums) {
+  constructor(parentContainer) {
     this.isMouseDown = false;
     this.parentContainer = parentContainer;
-    this.drums = drums;
     this.rows = new Array(4);
     this.drumGridElement = $(document.createElement("div"));
     this.drumTypes = ["KICK", "SNARE", "CLAP", "HAT"];
@@ -17,7 +16,7 @@ class DrumGrid {
       for (let j = 0; j < 16; j++) {
         const drumCellContainer = document.createElement("div");
         const $drumCellContainer = $(drumCellContainer);
-        const drumCell = new DrumCell($drumCellContainer, this.drumTypes[i], this.drums);
+        const drumCell = new DrumCell($drumCellContainer, this.drumTypes[i]);
         $drumCellContainer.addClass("drum-cell");
         drumCellContainer.drumCell = drumCell;
         this.rows[i].push(drumCell);

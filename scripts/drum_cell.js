@@ -1,17 +1,16 @@
 class DrumCell {
-  constructor(parentContainer, drumType, drums) {
+  constructor(parentContainer, drumType) {
     this.parentContainer = parentContainer;
     this.drumType = drumType;
-    this.drums = drums;
     this.active = false;
   }
 
-  playDrum() {
-    if (this.active) {
-      const vel = Math.random() * 0.5 + 0.5;
-      this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
-    }
-  }
+  // playDrum() {
+  //   if (this.active) {
+  //     const vel = Math.random() * 0.5 + 0.5;
+  //     this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
+  //   }
+  // }
 
   toggleActive() {
     if (this.active) {

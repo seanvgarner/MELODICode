@@ -71,16 +71,11 @@
 	      "release": 0.8
 	    }
 	  }).toMaster();
-	  var drums = new _Tone2.default.MultiPlayer({
-	    urls: {
-	      "KICK": "./scripts/sounds/snare.wav",
-	      "SNARE": "./scripts/sounds/snare.wav",
-	      "CLAP": "./scripts/sounds/clap.wav",
-	      "HAT": "./scripts/sounds/hat.wav"
-	    },
-	    volume: -10,
-	    fadeOut: 0.1
-	  }).toMaster();
+	  var kick = new Audio("./scripts/sounds/kick.wav");
+	  var snare = new Audio("./scripts/sounds/snare.wav");
+	  var clap = new Audio("./scripts/sounds/clap.wav");
+	  var hat = new Audio("./scripts/sounds/hat.wav");
+	
 	  var $gridContainer = $("#grid-container");
 	  var $drumContainer = $("#drum-container");
 	  var $timeBar = $("#time-bar");
@@ -94,7 +89,7 @@
 	  }
 	
 	  var grid = new _grid2.default($gridContainer, synth);
-	  var drumGrid = new _drum_grid2.default($drumContainer, drums);
+	  var drumGrid = new _drum_grid2.default($drumContainer);
 	
 	  $(document).mousedown(function () {
 	    grid.isMouseDown = true;
@@ -145,7 +140,19 @@
 	      }
 	
 	      if (currentDrum[_i2].active) {
-	        currentDrum[_i2].playDrum();
+	        switch (currentDrum[_i2].drumType) {
+	          case "KICK":
+	            kick.play();
+	            break;
+	          case "SNARE":
+	            snare.play();
+	            break;
+	          case "CLAP":
+	            clap.play();
+	            break;
+	          case "HAT":
+	            hat.play();
+	        }
 	      }
 	    }
 	  }, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], "8n");
@@ -22267,12 +22274,11 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var DrumGrid = function () {
-	  function DrumGrid(parentContainer, drums) {
+	  function DrumGrid(parentContainer) {
 	    _classCallCheck(this, DrumGrid);
 	
 	    this.isMouseDown = false;
 	    this.parentContainer = parentContainer;
-	    this.drums = drums;
 	    this.rows = new Array(4);
 	    this.drumGridElement = $(document.createElement("div"));
 	    this.drumTypes = ["KICK", "SNARE", "CLAP", "HAT"];
@@ -22287,7 +22293,7 @@
 	        for (var j = 0; j < 16; j++) {
 	          var drumCellContainer = document.createElement("div");
 	          var $drumCellContainer = $(drumCellContainer);
-	          var drumCell = new _drum_cell2.default($drumCellContainer, this.drumTypes[i], this.drums);
+	          var drumCell = new _drum_cell2.default($drumCellContainer, this.drumTypes[i]);
 	          $drumCellContainer.addClass("drum-cell");
 	          drumCellContainer.drumCell = drumCell;
 	          this.rows[i].push(drumCell);
@@ -22337,24 +22343,22 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
 	var DrumCell = function () {
-	  function DrumCell(parentContainer, drumType, drums) {
+	  function DrumCell(parentContainer, drumType) {
 	    _classCallCheck(this, DrumCell);
 	
 	    this.parentContainer = parentContainer;
 	    this.drumType = drumType;
-	    this.drums = drums;
 	    this.active = false;
 	  }
 	
+	  // playDrum() {
+	  //   if (this.active) {
+	  //     const vel = Math.random() * 0.5 + 0.5;
+	  //     this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
+	  //   }
+	  // }
+	
 	  _createClass(DrumCell, [{
-	    key: "playDrum",
-	    value: function playDrum() {
-	      if (this.active) {
-	        var vel = Math.random() * 0.5 + 0.5;
-	        this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
-	      }
-	    }
-	  }, {
 	    key: "toggleActive",
 	    value: function toggleActive() {
 	      if (this.active) {

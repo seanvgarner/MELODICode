@@ -13,16 +13,11 @@ $(() => {
         "release": 0.8,
         }
   }).toMaster();
-  const drums = new Tone.MultiPlayer({
-        urls : {
-          "KICK" : "./scripts/sounds/snare.wav",
-          "SNARE" : "./scripts/sounds/snare.wav",
-          "CLAP" : "./scripts/sounds/clap.wav",
-          "HAT" : "./scripts/sounds/hat.wav",
-        },
-        volume : -10,
-        fadeOut : 0.1,
-      }).toMaster();
+  const kick = new Audio("./scripts/sounds/kick.wav");
+  const snare = new Audio("./scripts/sounds/snare.wav");
+  const clap = new Audio("./scripts/sounds/clap.wav");
+  const hat = new Audio("./scripts/sounds/hat.wav");
+
   const $gridContainer = $("#grid-container");
   const $drumContainer = $("#drum-container");
   const $timeBar = $("#time-bar");
@@ -35,9 +30,8 @@ $(() => {
     $timeBar.append($timeBarCell);
   }
 
-
   const grid = new Grid($gridContainer, synth);
-  const drumGrid = new DrumGrid($drumContainer, drums);
+  const drumGrid = new DrumGrid($drumContainer);
 
   $(document).mousedown(() => {
     grid.isMouseDown = true;
@@ -89,7 +83,20 @@ $(() => {
       }
 
       if (currentDrum[i].active) {
-        currentDrum[i].playDrum();
+        switch (currentDrum[i].drumType) {
+          case "KICK":
+            kick.play();
+            break;
+          case "SNARE":
+            snare.play();
+            break;
+          case "CLAP":
+            clap.play();
+            break;
+          case "HAT":
+            hat.play();
+        }
+
       }
     }
 
