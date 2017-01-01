@@ -1,8 +1,7 @@
 .buttons {
   display: block;
   width: 864px;
-  margin: 0 auto;
-  margin-top: 25px;
+  margin: 25px auto;
 }
 
 .play-btn {
