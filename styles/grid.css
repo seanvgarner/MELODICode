@@ -2,6 +2,39 @@ body {
   background-color: #444444;
 }
 
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.top-bar {
+  box-sizing: border-box;
+  height: 100px;
+  width: 864px;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+
+.logo-container {
+  display: block;
+  float: left;
+  width: 60px;
+  height: 100%;
+}
+
+.logo-title {
+  box-sizing: border-box;
+  display: block;
+  float: left;
+  height: 100%;
+  padding-top: 42px;
+  color: #c9c9c9;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 34px;
+}
+
 .time-bar {
   display: block;
   width: 864px;
