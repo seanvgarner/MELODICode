@@ -32,17 +32,28 @@ class Grid {
   }
 
   addActivationHandlers($cellContainer) {
-    $cellContainer.on("click", (e) => {
+    $cellContainer.on("mousedown", (e) => {
       e.currentTarget.cell.toggleActive();
+      e.currentTarget.cell.playNote();
     });
 
     $cellContainer.mouseenter((e) => {
 
       if( this.isMouseDown ) {
         e.currentTarget.cell.toggleActive();
+        e.currentTarget.cell.playNote();
       }
     });
 
+  }
+
+  clear() {
+    this.rows.forEach((row) => {
+      row.forEach((noteCell) => {
+        noteCell.active = false;
+        noteCell.parentContainer.removeClass("active");
+      });
+    });
   }
 
 }

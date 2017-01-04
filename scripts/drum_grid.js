@@ -42,6 +42,15 @@ class DrumGrid {
     });
   }
 
+  clear() {
+    this.rows.forEach((row) => {
+      row.forEach((noteCell) => {
+        noteCell.active = false;
+        noteCell.parentContainer.removeClass("drum-active");
+      });
+    });
+  }
+
 }
 
 export default DrumGrid;

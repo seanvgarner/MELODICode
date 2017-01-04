@@ -23,7 +23,7 @@ img {
   height: 100%;
 }
 
-.logo-title {
+.logo-title h1 {
   box-sizing: border-box;
   display: block;
   float: left;
@@ -137,4 +137,111 @@ img {
 
 .drum-hit {
   background-color: #c2ffb5;
+}
+
+.panel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  visibility: hidden;
+	transition: visibility 0s 0.6s;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.panel.is-visible {
+	visibility: visible;
+	transition: visibility 0s 0s;
+}
+
+.panel-header {
+  display: block;
+  z-index: 2;
+  background: white;
+	position: fixed;
+  right: 0;
+	top: -50px;
+	width: 50%;
+	height: 50px;
+	transition: top 0.3s 0s;
+}
+
+.is-visible .panel-header {
+	top: 0;
+	transition: top 0.3s 0.3s;
+}
+
+.panel-container {
+  background: #dbe2e9;
+  z-index: 1;
+	position: fixed;
+	width: 50%;
+	height: 100%;
+	top: 0;
+	right: 0;
+
+	transition-property: transform;
+	transition-duration: 0.3s;
+	transition-delay: 0.3s;
+
+ 	transform: translate3d(100%, 0, 0);
+}
+
+.is-visible .panel-container {
+	transform: translate3d(0, 0, 0);
+	transition-delay: 0s;
+}
+
+.panel-header h4 {
+  height: auto;
+  padding: 10px;
+  color: grey;
+  font-size: 28px;
+  display: block;
+  float: left;
+  font-family: sans-serif;
+}
+.panel-header a {
+  text-decoration: none;
+  display: block;
+  float: right;
+  font-family: sans-serif;
+  font-size: 30px;
+  color: grey;
+  width: 50px;
+  padding: 8px;
+  height: auto;
+  text-align: center;
+}
+
+.panel-header a:hover {
+  background-color: grey;
+  color: white;
+}
+
+.panel-content {
+  color: #424242;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-top: 70px;
+  padding-right: 5%;
+  padding-bottom: 70px;
+  padding-left: 5%;
+  overflow: auto;
+  box-sizing: border-box;
+  font-size: 18px;
+  font-family: sans-serif;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+footer {
+  display: block;
+  height: 100px;
 }

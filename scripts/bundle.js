@@ -58,19 +58,22 @@
 	
 	var _drum_grid2 = _interopRequireDefault(_drum_grid);
 	
+	var _preset_constants = __webpack_require__(7);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	$(function () {
-	
+	  var freeverb = new _Tone2.default.Freeverb().toMaster();
 	  var synth = new _Tone2.default.PolySynth(16, _Tone2.default.MonoSynth, {
-	    "oscillator": { "type": "sine" },
+	    "oscillator": { "type": "triangle" },
 	    "envelope": {
-	      "attack": 0.093,
+	      "attack": 0.06,
 	      "decay": 0.3,
 	      "sustain": 0.3,
-	      "release": 0.8
-	    }
-	  }).toMaster();
+	      "release": 0.9
+	    },
+	    "volume": -5
+	  }).connect(freeverb);
 	  var kick = new Audio("./scripts/sounds/kick.wav");
 	  var snare = new Audio("./scripts/sounds/snare.wav");
 	  var clap = new Audio("./scripts/sounds/clap.wav");
@@ -161,8 +164,14 @@
 	
 	  _Tone2.default.Transport.start();
 	  _Tone2.default.Transport.bpm.value = 140;
+	
+	  // Control buttons:
 	  var $playBtn = $(".play-btn");
 	  var $pauseBtn = $(".pause-btn");
+	  var $clearBtn = $(".clear-btn");
+	  var $demoBtn = $(".demo-btn");
+	  var $infoBtn = $(".info-btn");
+	  var $closeInfoBtn = $(".panel-close");
 	
 	  $playBtn.on("click", function () {
 	
@@ -180,11 +189,65 @@
 	        noteCell.parentContainer.removeClass("hit");
 	      });
 	    });
+	
+	    drumGrid.rows.forEach(function (row) {
+	      row.forEach(function (drumCell) {
+	        drumCell.parentContainer.removeClass("drum-hit");
+	      });
+	    });
+	  });
+	
+	  $clearBtn.on("click", function () {
+	    grid.clear();
+	    drumGrid.clear();
+	  });
+	
+	  $demoBtn.on("click", function (e) {
+	    var clickedButton = e.currentTarget.innerHTML;
+	    var demoGrid = void 0;
+	    var demoDrums = void 0;
+	    switch (clickedButton) {
+	      case "Breakdown":
+	        demoGrid = _preset_constants.breakdownGrid;
+	        demoDrums = _preset_constants.breakdownDrums;
+	        break;
+	      case "Groove":
+	        demoGrid = _preset_constants.grooveGrid;
+	        demoDrums = _preset_constants.grooveDrums;
+	        break;
+	      case "Converge":
+	        demoGrid = _preset_constants.convergeGrid;
+	        demoDrums = _preset_constants.convergeDrums;
+	        break;
+	      case "Strolling":
+	        demoGrid = _preset_constants.strollingGrid;
+	        demoDrums = _preset_constants.strollingDrums;
+	        break;
+	    }
+	    grid.clear();
+	    drumGrid.clear();
+	
+	    demoGrid.forEach(function (coords) {
+	      grid.rows[coords[0]][coords[1]].toggleActive();
+	    });
+	    demoDrums.forEach(function (coords) {
+	      drumGrid.rows[coords[0]][coords[1]].toggleActive();
+	    });
 	  });
 	
 	  $("#tempo-slider").change(function (e) {
 	    var newTempo = parseInt(e.currentTarget.value);
 	    _Tone2.default.Transport.bpm.value = newTempo;
+	  });
+	
+	  $infoBtn.on("click", function () {
+	    $(".panel").addClass("is-visible");
+	    $("body").addClass("no-scroll");
+	  });
+	
+	  $closeInfoBtn.on("click", function () {
+	    $(".panel").removeClass("is-visible");
+	    $("body").removeClass("no-scroll");
 	  });
 	});
 
@@ -22173,15 +22236,27 @@
 	    value: function addActivationHandlers($cellContainer) {
 	      var _this = this;
 	
-	      $cellContainer.on("click", function (e) {
+	      $cellContainer.on("mousedown", function (e) {
 	        e.currentTarget.cell.toggleActive();
+	        e.currentTarget.cell.playNote();
 	      });
 	
 	      $cellContainer.mouseenter(function (e) {
 	
 	        if (_this.isMouseDown) {
 	          e.currentTarget.cell.toggleActive();
+	          e.currentTarget.cell.playNote();
 	        }
+	      });
+	    }
+	  }, {
+	    key: 'clear',
+	    value: function clear() {
+	      this.rows.forEach(function (row) {
+	        row.forEach(function (noteCell) {
+	          noteCell.active = false;
+	          noteCell.parentContainer.removeClass("active");
+	        });
 	      });
 	    }
 	  }]);
@@ -22323,6 +22398,16 @@
 	        }
 	      });
 	    }
+	  }, {
+	    key: "clear",
+	    value: function clear() {
+	      this.rows.forEach(function (row) {
+	        row.forEach(function (noteCell) {
+	          noteCell.active = false;
+	          noteCell.parentContainer.removeClass("drum-active");
+	        });
+	      });
+	    }
 	  }]);
 	
 	  return DrumGrid;
@@ -22353,13 +22438,6 @@
 	    this.active = false;
 	  }
 	
-	  // playDrum() {
-	  //   if (this.active) {
-	  //     const vel = Math.random() * 0.5 + 0.5;
-	  //     this.drums.start(this.drumType, "8n", 0, "8n", 0, vel);
-	  //   }
-	  // }
-	
 	  _createClass(DrumCell, [{
 	    key: "toggleActive",
 	    value: function toggleActive() {
@@ -22377,6 +22455,31 @@
 	}();
 	
 	exports.default = DrumCell;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	                            value: true
+	});
+	var breakdownGrid = exports.breakdownGrid = [[2, 0], [2, 2], [2, 13], [3, 6], [3, 15], [4, 1], [4, 9], [4, 12], [4, 14], [5, 4], [5, 7], [6, 14], [7, 0], [7, 3], [7, 9], [7, 15], [8, 2], [8, 5], [8, 8], [8, 11], [9, 3], [9, 7], [9, 10], [9, 14], [10, 0], [10, 8], [10, 12], [11, 2], [11, 4], [12, 5], [12, 7], [12, 9], [12, 11], [12, 13], [13, 6], [14, 0]];
+	
+	var breakdownDrums = exports.breakdownDrums = [[0, 0], [0, 5], [0, 9], [0, 14], [1, 4], [1, 12], [2, 13], [3, 1], [3, 2], [3, 7], [3, 10], [3, 11], [3, 15]];
+	
+	var grooveGrid = exports.grooveGrid = [[2, 0], [2, 2], [2, 11], [3, 8], [4, 2], [4, 10], [4, 11], [4, 12], [4, 14], [5, 5], [5, 7], [5, 8], [5, 9], [5, 13], [6, 1], [6, 3], [7, 8], [7, 11], [7, 12], [7, 14], [8, 9], [9, 6], [9, 15], [10, 1], [10, 2], [10, 4], [10, 5], [10, 7], [10, 8], [10, 9], [10, 10], [10, 14], [12, 4], [12, 8], [12, 14], [13, 2], [13, 12], [13, 15], [14, 9], [14, 10], [14, 13]];
+	
+	var grooveDrums = exports.grooveDrums = [[0, 0], [0, 2], [0, 11], [0, 13], [1, 1], [1, 2], [1, 4], [1, 5], [1, 7], [1, 8], [1, 10], [1, 14], [2, 6], [3, 1], [3, 3], [3, 5], [3, 7], [3, 9], [3, 11], [3, 13], [3, 15]];
+	
+	var convergeGrid = exports.convergeGrid = [[1, 0], [1, 3], [1, 4], [1, 11], [1, 12], [1, 15], [2, 1], [2, 5], [2, 10], [2, 14], [3, 0], [3, 2], [3, 6], [3, 7], [3, 8], [3, 9], [3, 13], [3, 15], [4, 1], [4, 3], [4, 4], [4, 11], [4, 12], [4, 14], [5, 2], [5, 5], [5, 6], [5, 7], [5, 8], [5, 9], [5, 10], [5, 13], [6, 3], [6, 12], [7, 0], [7, 2], [7, 4], [7, 6], [7, 8], [7, 10], [7, 12], [7, 14], [9, 3], [9, 5], [9, 6], [9, 7], [9, 8], [9, 9], [9, 10], [9, 12], [10, 2], [10, 4], [10, 11], [10, 13], [11, 1], [11, 3], [11, 6], [11, 7], [11, 8], [11, 9], [11, 12], [11, 14], [12, 0], [12, 2], [12, 5], [12, 10], [12, 13], [12, 15], [13, 1], [13, 4], [13, 11], [13, 14], [14, 0], [14, 3], [14, 12], [14, 15]];
+	
+	var convergeDrums = exports.convergeDrums = [[0, 0], [0, 2], [0, 10], [0, 13], [1, 4], [1, 12], [2, 4], [2, 12], [3, 0], [3, 2], [3, 4], [3, 6], [3, 8], [3, 10], [3, 12], [3, 14]];
+	
+	var strollingGrid = exports.strollingGrid = [[1, 15], [2, 1], [2, 11], [2, 13], [3, 2], [3, 6], [3, 9], [3, 14], [4, 3], [4, 5], [4, 10], [6, 7], [9, 0], [9, 4], [9, 8], [9, 12], [11, 6], [14, 2], [14, 10], [15, 0], [15, 4], [15, 8], [15, 12]];
+	
+	var strollingDrums = exports.strollingDrums = [[0, 0], [0, 4], [0, 7], [0, 8], [0, 12], [0, 15], [1, 2], [1, 6], [1, 10], [1, 14], [3, 1], [3, 3], [3, 5], [3, 7], [3, 9], [3, 11], [3, 13]];
 
 /***/ }
 /******/ ]);

@@ -8,29 +8,66 @@
       crossorigin="anonymous"></script>
       <script type='text/javascript'  src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js' ></script>
     <script type="text/javascript" src="scripts/bundle.js"></script>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400,600,700" rel="stylesheet">
     <link rel="stylesheet" href="styles/reset.css">
     <link rel="stylesheet" href="styles/grid.css">
     <link rel="stylesheet" href="styles/btns.css">
   </head>
   <body>
-    <header class="top-bar">
-      <div class="logo-container">
-        <img src="./logo/logo.png"/>
+    <main class="main-content group">
+      <header class="top-bar">
+        <div class="logo-container">
+          <img src="./logo/logo.png"/>
+        </div>
+        <div class="logo-title">
+          <h1>MELODICode</h1>
+        </div>
+      </header>
+      <div id="time-bar" class="time-bar group"></div>
+      <div id="grid-container" class="grid-container group"></div>
+      <div id="drum-container" class="drum-container group"></div>
+      <div class="buttons group">
+        <div class="play-btn">Play</div>
+        <div class="pause-btn">Stop</div>
+        <div class="clear-btn">Clear</div>
+        <div class="tempo">
+          <input id="tempo-slider" type="range" min="80" max="200" step="5" value="140"/>
+          <p class="tempo-text">Tempo</p>
+        </div>
       </div>
-      <div class="logo-title">
-        MELODICode
+      <div class="presets group">
+        <p class="preset-title">Preset Loops:</p>
+        <div class="demo-btn">Breakdown</div>
+        <div class="demo-btn">Groove</div>
+        <div class="demo-btn">Converge</div>
+        <div class="demo-btn">Strolling</div>
+        <div class="info-btn">Help/Info</div>
       </div>
-    </header>
-    <div id="time-bar" class="time-bar group"></div>
-    <div id="grid-container" class="grid-container group"></div>
-    <div id="drum-container" class="drum-container group"></div>
-    <div class="buttons group">
-      <div class="play-btn">Play</div>
-      <div class="pause-btn">Pause</div>
-      <div class="tempo">
-        <input id="tempo-slider" type="range" min="80" max="200" step="5" value="140"/>
-        <p class="tempo-text">Tempo</p>
+      <footer class="footer"></footer>
+    </main>
+
+    <div class="panel from-right">
+      <header class="panel-header">
+        <h4>Getting Started!</h4>
+        <a href="#" class="panel-close">X</a>
+      </header>
+
+      <div class="panel-container">
+        <div class="panel-content">
+          <p>Melodicode is a musical step sequencer. What you will immediately notice is a large grid of cells. Each of the lighter colored cells are notes. Each row of the note cells correspond to a note in the pentatonic scale so most notes sound good together. The darker cells on the bottom of the grid are simple drum kit sounds: Kick, Snare, Clap and Hi Hat. Click on and of the cells (or click and drag on the note cells) to activate them. Once you have a melody sequence mapped out, hit play and listen to the sequence in a loop. Thats it! You made a melody! Press Stop at anytime to stop the loop.</p>
+          </br>
+          <p><strong>Some useful buttons and controls:</strong></p>
+        </br>
+          <ul>
+            <li><strong>Tempo:</strong> Slide this slider right or left to increase/decrease the tempo (speed) of the loop.</li>
+            <li><strong>Clear:</strong> Workspace getting cluttered? click this button to clear the grid completely and start with a blank slate.</li>
+            <li><strong>Preset Loops:</strong> If you are having trouble getting started or you need some inspiration, click on one of these demo presets and the grid will populate with a premade melody that you can play. Tinker with them as you like!</li>
+          </ul>
+        </br>
+
+          If all else fails, just click around a bit and hit play, you'd be surprised at what you might accidentally create.
+        </div>
       </div>
     </div>
   </body>

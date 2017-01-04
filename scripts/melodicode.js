@@ -1,18 +1,23 @@
 import Tone from 'Tone';
 import Grid from './grid';
 import DrumGrid from './drum_grid';
+import { breakdownGrid, breakdownDrums,
+        grooveGrid, grooveDrums,
+        convergeGrid, convergeDrums,
+        strollingGrid, strollingDrums } from './preset_constants';
 
 $(() => {
-
+  const freeverb = new Tone.Freeverb().toMaster();
   const synth = new Tone.PolySynth(16, Tone.MonoSynth, {
-    "oscillator": { "type": "sine"},
+    "oscillator": { "type": "triangle"},
     "envelope": {
-        "attack": 0.093,
+        "attack": 0.06,
         "decay": 0.3,
         "sustain":0.3,
-        "release": 0.8,
-        }
-  }).toMaster();
+        "release": 0.9,
+    },
+    "volume": -5
+  }).connect(freeverb);
   const kick = new Audio("./scripts/sounds/kick.wav");
   const snare = new Audio("./scripts/sounds/snare.wav");
   const clap = new Audio("./scripts/sounds/clap.wav");
@@ -106,8 +111,14 @@ $(() => {
 
   Tone.Transport.start();
   Tone.Transport.bpm.value = 140;
+
+  // Control buttons:
   const $playBtn = $(".play-btn");
   const $pauseBtn = $(".pause-btn");
+  const $clearBtn = $(".clear-btn");
+  const $demoBtn = $(".demo-btn");
+  const $infoBtn = $(".info-btn");
+  const $closeInfoBtn = $(".panel-close");
 
   $playBtn.on("click", () => {
 
@@ -125,11 +136,65 @@ $(() => {
         noteCell.parentContainer.removeClass("hit");
       });
     });
+
+    drumGrid.rows.forEach((row) => {
+      row.forEach((drumCell) => {
+        drumCell.parentContainer.removeClass("drum-hit");
+      });
+    });
+  });
+
+  $clearBtn.on("click", () => {
+    grid.clear();
+    drumGrid.clear();
+  });
+
+  $demoBtn.on("click", (e) => {
+    const clickedButton = e.currentTarget.innerHTML;
+    let demoGrid;
+    let demoDrums;
+    switch(clickedButton) {
+      case "Breakdown":
+        demoGrid = breakdownGrid;
+        demoDrums = breakdownDrums;
+        break;
+      case "Groove":
+        demoGrid = grooveGrid;
+        demoDrums = grooveDrums;
+        break;
+      case "Converge":
+        demoGrid = convergeGrid;
+        demoDrums = convergeDrums;
+        break;
+      case "Strolling":
+        demoGrid = strollingGrid;
+        demoDrums = strollingDrums;
+        break;
+    }
+    grid.clear();
+    drumGrid.clear();
+
+    demoGrid.forEach((coords) => {
+      grid.rows[coords[0]][coords[1]].toggleActive();
+    });
+    demoDrums.forEach((coords) => {
+      drumGrid.rows[coords[0]][coords[1]].toggleActive();
+    });
   });
 
   $("#tempo-slider").change((e) => {
     const newTempo = parseInt(e.currentTarget.value);
     Tone.Transport.bpm.value = newTempo;
+  });
+
+  $infoBtn.on("click", () => {
+    $(".panel").addClass("is-visible");
+    $("body").addClass("no-scroll");
+  });
+
+  $closeInfoBtn.on("click", () => {
+    $(".panel").removeClass("is-visible");
+    $("body").removeClass("no-scroll");
   });
 
 });

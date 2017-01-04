@@ -42,6 +42,25 @@
   cursor: pointer;
 }
 
+.clear-btn {
+  display: block;
+  height: 30px;
+  width: 100px;
+  text-align: center;
+  color: #424242;
+  background-color: #c3c3c3;
+  padding: 5px;
+  box-sizing: border-box;
+  float: right;
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+.clear-btn:hover {
+  background-color: #49e9ff;
+  cursor: pointer;
+}
+
 .tempo {
   display: block;
   height: 30px;
@@ -52,10 +71,67 @@
   padding: 5px;
   box-sizing: border-box;
   float: right;
+  margin-right: 20px;
   border-radius: 5px;
 }
 
 .tempo-text {
   display: block;
   float: left;
+}
+
+.presets {
+  display: block;
+  width: 864px;
+  margin: 25px auto;
+}
+
+.preset-title {
+  display: block;
+  float: left;
+  height: 30px;
+  width: 100px;
+  color: white;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 5px;
+}
+
+.demo-btn {
+  display: block;
+  height: 30px;
+  width: 100px;
+  text-align: center;
+  color: #424242;
+  background-color: #c3c3c3;
+  padding: 5px;
+  box-sizing: border-box;
+  float: left;
+  border-radius: 5px;
+  border: 2px solid grey;
+  margin: 0 2px;
+}
+
+.demo-btn:hover {
+  background-color: #49e9ff;
+  cursor: pointer;
+}
+
+.info-btn {
+  display: block;
+  height: 30px;
+  width: 100px;
+  text-align: center;
+  color: #424242;
+  background-color: #ff9c1a;
+  padding: 5px;
+  box-sizing: border-box;
+  float: right;
+  border-radius: 5px;
+  margin: 0 2px;
+}
+
+.info-btn:hover {
+  background-color: #ffbd66;
+  cursor: pointer;
 }
