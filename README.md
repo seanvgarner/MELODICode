@@ -4,7 +4,7 @@
 
 [live version here!](http://www.sean-garner.co/MELODICode)
 
-MELODICode is an online browser-based musical step sequencer. It behaves similarly software step sequencers seen in DAWs like FL studio, Ableton Live, etc. Each row of cells in the sequencer belongs to a note in a scale (MELODICode uses the pentatonic scale so most notes sound good together). Users can activate these cells on the sequencer's grid by clicking on them. Once cells are activated and a user hits play, MELODICode loops through the sequencer from left to right triggering and playing any of the notes of the active cells creating a melody.
+MELODICode is an online browser-based musical step sequencer. It behaves similarly software step sequencers seen in DAWs like FL studio, Ableton Live, etc. Each row of cells in the sequencer belongs to a note in a scale (MELODICode uses the pentatonic scale so most notes sound good together). Users can activate these cells on the sequencer's grid by clicking on them. Once cells are activated and a user hits play, MELODICode loops through the sequencer from left to right triggering and playing any of the notes of the active cells creating a melody!
 
 ![screen-shot](./docs/melodicode.png)
 
