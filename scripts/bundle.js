@@ -249,6 +249,15 @@
 	    $(".panel").removeClass("is-visible");
 	    $("body").removeClass("no-scroll");
 	  });
+	
+	  $(".logo-title").on("mouseenter", function () {
+	    var el = $(".logo-container"),
+	        newone = el.clone(true);
+	
+	    el.before(newone);
+	
+	    $(".logo-container:last").remove();
+	  });
 	});
 
 /***/ },

@@ -6,7 +6,7 @@ body {
 img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
 .top-bar {
@@ -18,10 +18,51 @@ img {
 }
 
 .logo-container {
+  box-sizing: border-box;
   display: block;
   float: left;
   width: 60px;
   height: 100%;
+  animation: logo-bounce 2s linear 0s 2 alternate none running;
+}
+
+
+@keyframes logo-bounce {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  15% {
+    transform: translate(15px, -60px);
+    height: 80px
+  }
+  30% {
+    transform: translate(35px, 0px);
+    height: 45px;
+  }
+  40% {
+    transform: translate(60px, -60px);
+    height: 80px;
+  }
+  55% {
+    transform: translate(100px, 0px);
+    height: 45px;
+  }
+  65% {
+    transform: translate(140px, -60px);
+    height: 80px;
+  }
+  80% {
+    transform: translate(190px, 0px);
+    height: 45px;
+  }
+  90% {
+    transform: translate(250px, -60px);
+    height: 80px;
+  }
+  100% {
+    transform: translate(270px, 30px);
+    height: 45px;
+  }
 }
 
 .logo-title h1 {
@@ -40,8 +81,8 @@ img {
   display: block;
   width: 864px;
   margin: 0 auto;
-  border: 1px solid grey;
-  background-color: grey;
+  border: 1px solid #a6a6a6;
+  background-color: #a6a6a6;
 }
 
 .time-bar-cell {
@@ -63,13 +104,13 @@ img {
   display: block;
   margin: 0 auto;
   width: 864px;
-  border: 1px solid grey;
+  border: 1px solid #a6a6a6;
 }
 
 .filled-grid {
   height: 100%;
   width: 100%;
-  background-color: grey;
+  background-color: #a6a6a6;
 }
 
 
@@ -80,12 +121,12 @@ img {
   height: 20px;
   box-sizing: border-box;
   margin: 2px;
-  background-color: #c9c9c9;
+  background-color: #cccccc;
   border-radius:15%;
 }
 
 .cell:hover {
-  background-color: #fcffb2;
+  background-color: #fdffcc;
   cursor: pointer;
 }
 
@@ -104,13 +145,13 @@ img {
   display: block;
   margin: 0 auto;
   width: 864px;
-  border: 1px solid grey;
+  border: 1px solid #a6a6a6;
 }
 
 .filled-drum-grid {
   height: 100%;
   width: 100%;
-  background-color: grey;
+  background-color: #a6a6a6;
 }
 
 .drum-cell {
@@ -125,7 +166,7 @@ img {
 }
 
 .drum-cell:hover {
-  background-color: #fcffb2;
+  background-color: #fdffcc;
   cursor: pointer;
 }
 

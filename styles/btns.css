@@ -16,11 +16,15 @@
   float: left;
   margin-right: 20px;
   border-radius: 5px;
+  box-shadow: 0px 15px 12px -10px rgba(0,0,0,0.3);
+  transition: all 200ms cubic-bezier(0.25, 0.39, 0.39, 2.01)
 }
 
 .play-btn:hover {
-  background-color: #01ff51;
+  background-color: #0ef174;
   cursor: pointer;
+  transform: scale(1.08);
+  box-shadow: 0px 10px 18px -2px rgba(0,0,0,0.4);
 }
 
 .pause-btn {
@@ -35,11 +39,15 @@
   float: left;
   margin-right: 30px;
   border-radius: 5px;
+  box-shadow: 0px 15px 12px -10px rgba(0,0,0,0.3);
+  transition: all 200ms cubic-bezier(0.25, 0.39, 0.39, 2.01)
 }
 
 .pause-btn:hover {
   background-color: #ff3333;
   cursor: pointer;
+  transform: scale(1.08);
+  box-shadow: 0px 10px 18px -2px rgba(0,0,0,0.4);
 }
 
 .clear-btn {

@@ -197,4 +197,13 @@ $(() => {
     $("body").removeClass("no-scroll");
   });
 
+  $(".logo-title").on("mouseenter", function() {
+    const el = $(".logo-container"),
+    newone = el.clone(true);
+
+    el.before(newone);
+
+    $(".logo-container:last").remove();
+  });
+
 });
