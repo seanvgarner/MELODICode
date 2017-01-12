@@ -75,6 +75,7 @@ img {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 600;
   font-size: 34px;
+  cursor: pointer;
 }
 
 .time-bar {

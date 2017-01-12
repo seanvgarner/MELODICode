@@ -197,7 +197,7 @@ $(() => {
     $("body").removeClass("no-scroll");
   });
 
-  $(".logo-title").on("mouseenter", function() {
+  $(".logo-title h1").on("mouseenter", function() {
     const el = $(".logo-container"),
     newone = el.clone(true);
 
