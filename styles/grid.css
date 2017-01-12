@@ -174,7 +174,7 @@ img {
 }
 
 .panel-container {
-  background: #dbe2e9;
+  background: #d8ffe7;
   z-index: 1;
 	position: fixed;
 	width: 50%;
@@ -203,22 +203,35 @@ img {
   float: left;
   font-family: sans-serif;
 }
-.panel-header a {
-  text-decoration: none;
+
+.close-container {
+  box-sizing: border-box;
   display: block;
   float: right;
-  font-family: sans-serif;
-  font-size: 30px;
-  color: grey;
   width: 50px;
-  padding: 8px;
-  height: auto;
+  height: 100%;
+  transition: background-color 100ms ease-in-out;
+}
+.panel-header a {
+  text-decoration: none;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 auto;
+  font-family: sans-serif;
+  font-size: 40px;
+  color: grey;
   text-align: center;
+  transition: transform 300ms ease-in-out;
 }
 
 .panel-header a:hover {
-  background-color: grey;
   color: white;
+  transform: rotate(180deg);
+}
+
+.close-container:hover {
+  opacity: 0.8;
+  background-color: grey;
 }
 
 .panel-content {
